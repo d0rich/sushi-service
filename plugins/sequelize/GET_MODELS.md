@@ -1,0 +1,1 @@
+sequelize-auto -l es6 -o "./plugins/sequelize/models" -c "./plugins/sequelize/seq-options.json" -d "de7u68q3i1vj0h" -u "tdwuqtdnmqkrgs" -x "b33157c68a66fe82d511f19f89383df3a3f05a8736f14dea5829013bd9b7820d" -p 5432 -e postgres
