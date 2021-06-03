@@ -7,6 +7,7 @@ class ItemTypes extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   super.init({
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -14,6 +15,11 @@ class ItemTypes extends Sequelize.Model {
     type: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    urlName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "rolls"
     }
   }, {
     sequelize,
@@ -33,6 +39,13 @@ class ItemTypes extends Sequelize.Model {
         unique: true,
         fields: [
           { name: "type" },
+        ]
+      },
+      {
+        name: "itemtypes_urlname_uindex",
+        unique: true,
+        fields: [
+          { name: "urlName" },
         ]
       },
     ]
