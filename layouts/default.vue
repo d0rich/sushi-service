@@ -107,9 +107,14 @@ export default {
       fixed: true,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-home',
+          title: 'Главная',
           to: '/'
+        },
+        {
+          icon: 'mdi-silverware',
+          title: 'Меню',
+          to: '/menu'
         },
         {
           icon: 'mdi-chart-bubble',
@@ -143,6 +148,8 @@ export default {
       const token = localStorage.getItem('token')
       if (token) await this.authByToken(token)
     }
+  },
+  async fetch(){
 
   }
 }
