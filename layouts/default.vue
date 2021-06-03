@@ -8,6 +8,36 @@
       app
     >
       <v-list>
+        <v-list-item to="/register" v-if="!isAuth">
+          <v-list-item-action>
+            <v-icon>mdi-account-plus</v-icon>
+          </v-list-item-action>
+          <v-list-item-content v-text="'Регистрация'"/>
+        </v-list-item>
+        <login-modal v-if="!isAuth">
+          <v-list-item link >
+            <v-list-item-action>
+              <v-icon>mdi-login</v-icon>
+            </v-list-item-action>
+            <v-list-item-content v-text="'Вход'"/>
+          </v-list-item>
+        </login-modal>
+
+        <v-list-item v-if="isAuth">
+          <v-list-item-action>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="user" />
+            <v-list-item-subtitle v-text="userType" />
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link v-if="isAuth" @click="logout">
+          <v-list-item-action>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content v-text="'Выход'"/>
+        </v-list-item>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -50,35 +80,12 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer
       :absolute="!fixed"
       app
@@ -89,12 +96,15 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
+import LoginModal from "~/components/auth/LoginModal";
 export default {
+  components: {LoginModal},
   data () {
     return {
       clipped: false,
       drawer: false,
-      fixed: false,
+      fixed: true,
       items: [
         {
           icon: 'mdi-apps',
@@ -112,6 +122,28 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
+  },
+  computed:{
+    ...mapGetters({
+      userType: "auth/authUserType",
+      isAuth: "auth/isAuth"
+    }),
+    user(){
+      return this.$store.state.auth.login
+    }
+  },
+  methods: {
+    ...mapActions({
+      authByToken: "auth/authByToken",
+      logout: "auth/logout"
+    })
+  },
+  async created(){
+    if (process.browser){
+      const token = localStorage.getItem('token')
+      if (token) await this.authByToken(token)
+    }
+
   }
 }
 </script>
