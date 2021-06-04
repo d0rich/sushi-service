@@ -23,6 +23,12 @@
           </v-list-item>
         </login-modal>
 
+        <v-list-item link v-if="isAuth" @click="logout">
+          <v-list-item-action>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content v-text="'Выход'"/>
+        </v-list-item>
         <v-list-item v-if="isAuth">
           <v-list-item-action>
             <v-icon>mdi-account</v-icon>
@@ -32,12 +38,7 @@
             <v-list-item-subtitle v-text="userType" />
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link v-if="isAuth" @click="logout">
-          <v-list-item-action>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-action>
-          <v-list-item-content v-text="'Выход'"/>
-        </v-list-item>
+
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -125,7 +126,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Суши от Надюши'
     }
   },
   computed:{

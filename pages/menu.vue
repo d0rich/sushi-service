@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row no-gutters class="mb-5">
-      <v-btn exact tile :to="`/menu/${type.urlName}`"
+      <v-btn exact tile :to="`/menu/${type.urlName}`" class="mx-3"
              v-for="type in $store.state.itemTypes.itemTypes" :key="type.id">
         {{type.type}}
       </v-btn>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-name: "index"
+name: "menu-index"
 }
 </script>
 

@@ -27,6 +27,12 @@ export const getters = {
   },
   isAuth(state){
     return !!state.token
+  },
+  isAdmin(state){
+    return state.userType === 3
+  },
+  isOperator(state){
+    return state.userType === 2
   }
 }
 

@@ -1,36 +1,66 @@
 <template>
   <div>
-    <div class="items-container">
-      <v-card max-width="300px" width="100%" min-width="200px" v-for="item in items" :key="item.id">
-        <v-img :src="item.imgUrl" />
+    <create-item-modal class="mb-3" @created="$fetch" />
+    <edit-item-modal @edited="$fetch()" @close="editModal.show = false"
+                     :item-id="editModal.itemId" :show="editModal.show" />
+    <v-progress-linear
+      v-if="$fetchState.pending"
+      active indeterminate
+    ></v-progress-linear>
+    <v-pagination v-if="pages>1" class="mb-3" :disabled="$fetchState.pending" v-model="page" :length="pages" />
+    <transition-group class="items-container">
+      <v-card :disabled="$fetchState.pending" v-for="item in items" :key="item.id"
+              :style="{opacity: item.show ? 1 : 0.5 }"
+              max-width="300px" width="100%" min-width="200px" >
+        <v-img max-height="150px" :src="item.imgUrl" />
         <v-card-title>{{item.name}}</v-card-title>
         <v-card-text>
           <p>{{item.description}}</p>
         </v-card-text>
         <v-divider />
-        <v-card-subtitle>
-          {{item.weight}} грамм | {{item.cost}} руб.
-        </v-card-subtitle>
+        <v-card-actions>
+          <span>{{item.weight}} грамм | {{item.cost}} руб.</span>
+          <v-spacer />
+          <v-btn v-if="$store.state.auth.userType === 3"
+                 icon @click="editModal.show = true; editModal.itemId = item.id">
+            <v-icon>
+              mdi-pencil
+            </v-icon>
+          </v-btn>
+        </v-card-actions>
       </v-card>
-    </div>
+    </transition-group>
+    <v-pagination v-if="pages>1" class="mt-3" :disabled="$fetchState.pending" v-model="page" :length="pages" />
   </div>
 </template>
 
 <script>
 import {mapActions} from 'vuex'
+import CreateItemModal from "@/components/items/CreateItemModal";
+import EditItemModal from "@/components/items/EditItemModal";
 export default {
 name: "type",
+  components: {
+    CreateItemModal, EditItemModal
+  },
   data(){
     return{
       pages: 1,
       page: 1,
-      onPage: 24,
-      items: []
+      onPage: 12,
+      items: [],
+      editModal: {
+        show: false,
+        itemId: 0
+      }
     }
   },
   watch:{
     page(){
       this.$fetch()
+    },
+    '$route.params.type'(){
+      this.page = 1
     },
     '$route'(){
       this.$fetch()
@@ -38,21 +68,29 @@ name: "type",
   },
   methods: {
     ...mapActions({
-      typeNow: "itemTypes/typeNow"
+      typeNow: "itemTypes/typeNow",
+      catchServerError: "getServerErrorMessage"
     })
   },
   async fetch(){
     let type = this.$route.params.type
     if (!this.$route.params.type) {
-      this.$router.push({...this.$route, params: {type: 'rolls'}})
+      await this.$router.push({...this.$route, params: {type: 'rolls'}})
       type = 'rolls'
     }
-    const res = await this.$axios.get(`/api/items/get/all`+
-      `?onPage=${this.onPage}`+
-      `&page=${this.page}`+
-      `&type=${(await this.$store.dispatch("itemTypes/typeNow", type)).id}`)
-    this.pages = res.data.pages
-    this.items = res.data.items
+    try {
+      const res = await this.$axios.get(`/api/items/get/all`+
+        `?onPage=${this.onPage}`+
+        `&page=${this.page}`+
+        `&type=${(await this.$store.dispatch("itemTypes/typeNow", type)).id}`+
+        `&showAll=${this.$store.getters["auth/isAdmin"] ? 1 : 0 }`)
+      this.pages = res.data.pages
+      this.items = res.data.items
+    }
+    catch (e){
+      this.catchServerError(e)
+      await this.$router.push({...this.$route, params: {type: 'rolls'}})
+    }
 
 
 
