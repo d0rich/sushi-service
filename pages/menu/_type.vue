@@ -21,7 +21,7 @@
         <v-card-actions>
           <span>{{item.weight}} грамм | {{item.cost}} руб.</span>
           <v-spacer />
-          <v-btn v-if="$store.state.auth.userType === 3"
+          <v-btn v-if="isAdmin"
                  icon @click="editModal.show = true; editModal.itemId = item.id">
             <v-icon>
               mdi-pencil
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import CreateItemModal from "@/components/items/CreateItemModal";
 import EditItemModal from "@/components/items/EditItemModal";
 export default {
@@ -55,12 +55,20 @@ name: "type",
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      isAdmin: "auth/isAdmin"
+    })
+  },
   watch:{
     page(){
       this.$fetch()
     },
     '$route.params.type'(){
       this.page = 1
+    },
+    isAdmin(){
+      this.$fetch()
     },
     '$route'(){
       this.$fetch()

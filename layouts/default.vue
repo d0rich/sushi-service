@@ -44,7 +44,7 @@
           :key="i"
           :to="item.to"
           router
-          exact
+          :exact="item.exact"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -110,17 +110,20 @@ export default {
         {
           icon: 'mdi-home',
           title: 'Главная',
-          to: '/'
+          to: '/',
+          exact: true
         },
         {
           icon: 'mdi-silverware',
           title: 'Меню',
-          to: '/menu'
+          to: '/menu',
+          exact: false
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/inspire'
+          to: '/inspire',
+          exact: true
         }
       ],
       miniVariant: false,
