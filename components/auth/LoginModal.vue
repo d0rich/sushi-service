@@ -13,8 +13,8 @@
           </v-card-title>
           <v-card-text>
             <p class="error--text">{{errorMsg}}</p>
-            <v-text-field placeholder="Логин" v-model="formData.login" :rules="rules" />
-            <v-text-field placeholder="Пароль" v-model="formData.password" :rules="rules" type="password" />
+            <v-text-field label="Логин" v-model="formData.login" :rules="rules" />
+            <v-text-field label="Пароль" v-model="formData.password" :rules="rules" type="password" />
           </v-card-text>
           <v-card-actions>
             <v-spacer />

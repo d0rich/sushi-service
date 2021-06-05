@@ -4,9 +4,9 @@
       <h1 v-if="$store.getters['auth/isOperator']">Заказы</h1>
       <h1 v-else >Мои заказы</h1>
       <v-spacer />
-      <v-btn color="primary" @click="$fetch(); orderIndNow = null">
+      <!-- <v-btn color="primary" @click="$fetch(); orderIndNow = null">
         <v-icon>mdi-reload</v-icon> Обновить
-      </v-btn>
+      </v-btn> -->
     </v-row>
 
     <v-divider class="my-3" />
@@ -17,7 +17,7 @@
     <v-pagination v-if="pages > 1" class="mt-3"
                   :disabled="$fetchState.pending"
                   v-model="page" :length="pages" />
-    <v-expansion-panels v-model="orderIndNow">
+    <v-expansion-panels popout v-model="orderIndNow">
       <v-expansion-panel v-for="order in orders" :key="order.id" @change="updateOrder(order)">
         <v-expansion-panel-header class="pa-1 pa-sm-3">
           <span class="pa-1">
@@ -151,8 +151,11 @@ export default {
     page(){
       this.$fetch()
     },
-    async 'isAuth'(){
-      await this.$fetch()
+    '$store.state.orders.events'(){
+      this.$fetch()
+    },
+    'isAuth'(){
+      this.$fetch()
     }
   },
   async fetch(){
@@ -166,6 +169,9 @@ export default {
         this.orders = res.data.orders.map(order => {
           return { ...order, load: false, tStatus: order.status }
         })
+        if (!isNaN(this.orderIndNow)) {
+          await this.updateOrder(this.orders[this.orderIndNow])
+        }
       }
       catch (e){
         this.catchServerError(e)

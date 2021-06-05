@@ -69,7 +69,8 @@
           <v-list-item-action>
             <v-badge color="red"
                      :content="`+${$store.state.cart.events}`" :value="$store.state.cart.events">
-              <v-badge bottom :content="$store.getters['cart/positionsCount']">
+              <v-badge bottom :content="$store.getters['cart/positionsCount']"
+                       :value="$store.getters['cart/positionsCount']">
               <v-icon>mdi-cart</v-icon>
               </v-badge>
             </v-badge>
@@ -94,13 +95,14 @@
           </v-icon>
         </v-badge>
       </v-btn>
-
+      <img :src="imgSrc" alt="logo" style="height: 80%">
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon to="/cart" class="ma-2">
         <v-badge color="red" bordered light
                  :content="`+${$store.state.cart.events}`" :value="$store.state.cart.events">
-          <v-badge bottom :content="$store.getters['cart/positionsCount']">
+          <v-badge bottom :content="$store.getters['cart/positionsCount']"
+                   :value="$store.getters['cart/positionsCount']">
               <v-icon>mdi-cart</v-icon>
           </v-badge>
         </v-badge>
@@ -125,11 +127,13 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import LoginModal from "~/components/auth/LoginModal";
+import logo from '~/static/sushi.svg'
 export default {
   components: {LoginModal},
   data () {
     return {
       clipped: false,
+      imgSrc: logo,
       drawer: false,
       fixed: true,
       items: [

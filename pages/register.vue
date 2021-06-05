@@ -3,12 +3,12 @@
     <h1>Регистрация</h1>
     <v-divider />
     <p class="error--text">{{errorMsg}}</p>
-    <v-text-field placeholder="Логин" v-model="formData.login" :rules="rules" />
-    <v-text-field placeholder="Имя" v-model="formData.firstName" :rules="rules" />
-    <v-text-field placeholder="Фамилия" v-model="formData.secondName" :rules="rules" />
-    <v-text-field type="ph" placeholder="Телефон" v-model="formData.phone" />
-    <v-text-field placeholder="Пароль" v-model="formData.password" :rules="rules" type="password" />
-    <v-text-field placeholder="Пароль" v-model="repeatPwd" :rules="[...rules, passwordRule]" type="password" />
+    <v-text-field label="Логин" v-model="formData.login" :rules="rules" />
+    <v-text-field label="Имя" v-model="formData.firstName" :rules="rules" />
+    <v-text-field label="Фамилия" v-model="formData.secondName" :rules="rules" />
+    <v-text-field type="ph" label="Телефон" v-model="formData.phone" />
+    <v-text-field label="Пароль" v-model="formData.password" :rules="rules" type="password" />
+    <v-text-field label="Повторите пароль" v-model="repeatPwd" :rules="[...rules, passwordRule]" type="password" />
     <v-row no-gutters>
       <v-spacer />
       <v-btn :loading="load" color="primary" type="submit">

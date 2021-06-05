@@ -1,14 +1,16 @@
 <template>
   <div>
+    <h1>Карточка покупателя</h1>
+    <v-divider class="my-3" />
     <p class="error--text">{{errorMsg}}</p>
     <p class="success--text">{{successMsg}}</p>
     <v-form v-if="$store.getters['auth/isAuth']"
             :disabled="load" ref="form"
             v-model="valid" @submit.prevent="editProfile">
-      <v-text-field placeholder="Имя" v-model="formData.firstName" :rules="rules" />
-      <v-text-field placeholder="Фамилия" v-model="formData.secondName" :rules="rules" />
-      <v-text-field type="ph" placeholder="Телефон" v-model="formData.phone" />
-      <v-text-field placeholder="Адрес по умолчанию" v-model="formData.address" />
+      <v-text-field label="Имя" v-model="formData.firstName" :rules="rules" />
+      <v-text-field label="Фамилия" v-model="formData.secondName" :rules="rules" />
+      <v-text-field type="ph" label="Телефон" v-model="formData.phone" />
+      <v-text-field label="Адрес по умолчанию" v-model="formData.address" />
       <v-row no-gutters>
         <v-spacer />
         <v-btn :loading="load" type="submit" color="primary">
@@ -25,6 +27,11 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
 name: "personal",
+  head(){
+    return{
+      title: 'Карточка покупателя'
+    }
+  },
   data(){
     return{
       valid: true,
