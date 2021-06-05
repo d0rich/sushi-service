@@ -20,7 +20,7 @@ router.get('/get/all', async (req,res) => {
         ...showOption
       }
     })
-    const count = await db.Items.count({ where: { itemTypeId: itemType } })
+    const count = await db.Items.count({ where: { itemTypeId: itemType, ...showOption } })
     res.send({ pages: Math.ceil(count / itemsOnPage), items })
   }
   catch (err){

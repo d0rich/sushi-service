@@ -54,6 +54,14 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item to="/orders" router exact v-if="$store.getters['auth/isAuth']" >
+          <v-list-item-action>
+            <v-icon>mdi-format-list-bulleted-square</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="'Заказы'" />
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item to="/cart" router exact >
           <v-list-item-action>
             <v-badge color="red"
@@ -83,7 +91,6 @@
         <v-badge color="red" bordered light
                  :content="`+${$store.state.cart.events}`" :value="$store.state.cart.events">
           <v-badge bottom :content="$store.getters['cart/positionsCount']">
-
               <v-icon>mdi-cart</v-icon>
           </v-badge>
         </v-badge>

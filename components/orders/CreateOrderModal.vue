@@ -89,6 +89,10 @@ export default {
       catchError: 'getServerErrorMessage'
     }),
     async createOrder() {
+      if (this.allCost === 0) {
+        this.errorMsg='Сумма заказа должна быть больше 0 руб.'
+        return
+      }
       this.$refs.form.validate()
       if (this.valid) {
         this.load = true
