@@ -82,4 +82,31 @@ router.post('/edit/status', async (req, res) => {
   }
 })
 
+router.get('/get/diff/:userId', async (req,res) => {
+  try{
+    const user = await db.Users.findByPk(req.params['userId'])
+    if (user){
+      const userIdOption = user.userType === 2 ? {}: { clientId: user.id }
+      const orders = await db.Orders.findAll({
+        order: [['createdAt', 'DESC']],
+        attributes: ['id', 'status'],
+        where: {
+          ...userIdOption,
+          status: {
+            [Op.notIn]: [0, 5]
+          }
+        }
+      })
+
+      res.send(orders)
+    }
+    else {
+      res.status(401).send('Unauthorized')
+    }
+  }
+  catch (err){
+    res.status(500).send(err.message)
+  }
+})
+
 export default router

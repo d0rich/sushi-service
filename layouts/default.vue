@@ -57,7 +57,9 @@
 
         <v-list-item to="/orders" router exact v-if="$store.getters['auth/isAuth']" >
           <v-list-item-action>
-            <v-icon>mdi-format-list-bulleted-square</v-icon>
+            <v-badge :content="$store.state.orders.events" :value="$store.state.orders.events">
+              <v-icon>mdi-format-list-bulleted-square</v-icon>
+            </v-badge>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="'Заказы'" />
@@ -85,7 +87,14 @@
       color="primary"
       app
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-btn icon @click.stop="drawer = !drawer">
+        <v-badge light bordered :content="$store.state.orders.events" :value="$store.state.orders.events">
+          <v-icon>
+            mdi-menu
+          </v-icon>
+        </v-badge>
+      </v-btn>
+
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon to="/cart" class="ma-2">
@@ -163,6 +172,7 @@ export default {
       const token = localStorage.getItem('token')
       if (token) await this.authByToken(token)
       this.$store.commit("cart/cartFromLocalStorage")
+      this.$store.dispatch("orders/startListen")
     }
   },
   async fetch(){

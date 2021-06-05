@@ -1,7 +1,14 @@
 <template>
   <div>
-    <h1 v-if="$store.getters['auth/isOperator']">Заказы</h1>
-    <h1 v-else >Мои заказы</h1>
+    <v-row no-gutters>
+      <h1 v-if="$store.getters['auth/isOperator']">Заказы</h1>
+      <h1 v-else >Мои заказы</h1>
+      <v-spacer />
+      <v-btn color="primary" @click="$fetch(); orderIndNow = null">
+        <v-icon>mdi-reload</v-icon> Обновить
+      </v-btn>
+    </v-row>
+
     <v-divider class="my-3" />
     <v-progress-linear
       v-if="$fetchState.pending"
@@ -149,6 +156,7 @@ export default {
     }
   },
   async fetch(){
+    this.$store.commit("orders/removeEvents")
     if (this.isAuth){
       try {
         const res = await this.$axios.get(`/api/orders/get/all/${this.$store.state.auth.id}`+
