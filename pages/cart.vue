@@ -6,6 +6,13 @@
       v-if="$fetchState.pending"
       active indeterminate
     ></v-progress-linear>
+    <div class="my-10" v-if="$store.getters['cart/positionsCount'] === 0">
+      <h2>Упс, похоже, Вы ничего не выбрали из нашего меню :(</h2>
+      <span>Попробуйте посетить</span>
+      <v-btn to="/menu" color="primary">
+        эту страницу
+      </v-btn>
+    </div>
     <transition-group class="items" name="scale-transition">
       <v-sheet rounded class="mb-3" v-for="(item, index) in items" :key="item.item.id"
                elevation="3"
