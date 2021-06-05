@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="show" width="90%" max-width="500px" persistent v-if="$store.state.auth.userType === 3">
+  <v-dialog v-model="show" width="90%" max-width="500px" persistent>
     <v-form :disabled="load" ref="form" v-model="valid" @submit.prevent="createOrder">
       <v-card>
         <v-toolbar color="primary">
