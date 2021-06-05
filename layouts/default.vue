@@ -29,7 +29,8 @@
           </v-list-item-action>
           <v-list-item-content v-text="'Выход'"/>
         </v-list-item>
-        <v-list-item v-if="isAuth">
+
+        <v-list-item to="/personal" v-if="isAuth">
           <v-list-item-action>
             <v-icon>mdi-account</v-icon>
           </v-list-item-action>

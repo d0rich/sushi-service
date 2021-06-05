@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {Op} from 'sequelize'
+import {Op, where} from 'sequelize'
 import { db } from '../plugins/sequelize'
 
 const router = Router()
@@ -95,7 +95,23 @@ router.post('/register', async (req,res) => {
   catch (err){
     res.status(500).send(err.message)
   }
+})
 
+router.post('/profile/edit', async (req,res) => {
+  try{
+    const authData = req.body
+    await db.Users.update({
+      address: authData.address,
+      phone: authData.phone,
+      firstName: authData.firstName,
+      secondName: authData.secondName
+    }, { where: { id: authData.id } })
+    const user = await db.Users.findByPk(authData.id)
+    res.send(user)
+  }
+  catch (err){
+    res.status(500).send(err.message)
+  }
 })
 
 
