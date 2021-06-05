@@ -8,6 +8,7 @@
     ></v-progress-linear>
     <transition-group class="items" name="scale-transition">
       <v-sheet rounded class="mb-3" v-for="(item, index) in items" :key="item.item.id"
+               elevation="3"
                :style="{opacity: item.item.show ? 1 : 0.5 }">
         <div class="item__info">
           <v-img class="rounded" max-width="100%" max-height="100%" :src="item.item.imgUrl" />
@@ -40,7 +41,7 @@
     </transition-group>
 
     <v-divider class="my-5" />
-    <v-sheet rounded class="pa-3">
+    <v-sheet rounded class="pa-3" elevation="3">
       <v-row no-gutters align="center">
         <h2>Итого:</h2>
         <v-spacer />
@@ -49,7 +50,7 @@
       </v-row>
       <v-divider class="my-3" />
       <v-row no-gutters justify="end">
-        <v-btn class="my-1" color="red" @click="items = []; setStoreItems()">
+        <v-btn dark class="my-1" color="red" @click="items = []; setStoreItems()">
           Очистить корзину
         </v-btn>
         <v-btn class="ml-1 ml-sm-3 my-1" color="primary" @click="showSendForm = true">

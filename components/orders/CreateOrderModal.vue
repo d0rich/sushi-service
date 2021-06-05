@@ -2,7 +2,7 @@
   <v-dialog v-model="show" width="90%" max-width="500px" persistent>
     <v-form :disabled="load" ref="form" v-model="valid" @submit.prevent="createOrder">
       <v-card>
-        <v-toolbar color="primary">
+        <v-toolbar dark color="primary">
           Подтверждение заказа
           <v-spacer />
           <v-btn icon @click="$emit('close')" >
@@ -18,7 +18,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn :loading="load" @click="$emit('close')" color="red">Закрыть</v-btn>
+          <v-btn :loading="load" @click="$emit('close')" color="red" dark>Закрыть</v-btn>
           <v-btn :loading="load" type="submit" color="primary">Отправить</v-btn>
         </v-card-actions>
       </v-card>

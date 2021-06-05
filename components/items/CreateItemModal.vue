@@ -4,7 +4,7 @@
     <v-dialog v-model="show" width="90%" max-width="500px">
       <v-form :disabled="load" ref="form" v-model="valid" @submit.prevent="createItem">
         <v-card>
-          <v-toolbar color="primary">
+          <v-toolbar dark color="primary">
             Создание товара
             <v-spacer />
             <v-btn icon @click="show = false" >
@@ -26,7 +26,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn :loading="load" @click="show = false" color="red">Закрыть</v-btn>
+            <v-btn :loading="load" @click="show = false" color="red" dark>Закрыть</v-btn>
             <v-btn :loading="load" type="submit" color="primary">Создать</v-btn>
           </v-card-actions>
         </v-card>

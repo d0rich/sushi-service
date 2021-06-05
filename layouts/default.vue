@@ -80,7 +80,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon to="/cart" class="ma-2">
-        <v-badge color="red"
+        <v-badge color="red" bordered light
                  :content="`+${$store.state.cart.events}`" :value="$store.state.cart.events">
           <v-badge bottom :content="$store.getters['cart/positionsCount']">
 
