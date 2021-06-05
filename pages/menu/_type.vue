@@ -19,12 +19,17 @@
         </v-card-text>
         <v-divider />
         <v-card-actions>
-          <span>{{item.weight}} грамм | {{item.cost}} руб.</span>
+          <span>{{item.weight}} грамм | {{item.cost}} ₽</span>
           <v-spacer />
           <v-btn v-if="isAdmin"
                  icon @click="editModal.show = true; editModal.itemId = item.id">
             <v-icon>
               mdi-pencil
+            </v-icon>
+          </v-btn>
+          <v-btn v-if="item.show" icon @click="addToCart(item.id)">
+            <v-icon>
+              mdi-cart-plus
             </v-icon>
           </v-btn>
         </v-card-actions>
@@ -35,7 +40,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 import CreateItemModal from "@/components/items/CreateItemModal";
 import EditItemModal from "@/components/items/EditItemModal";
 export default {
@@ -78,6 +83,9 @@ name: "type",
     ...mapActions({
       typeNow: "itemTypes/typeNow",
       catchServerError: "getServerErrorMessage"
+    }),
+    ...mapMutations({
+      addToCart:"cart/addItem"
     })
   },
   async fetch(){

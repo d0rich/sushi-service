@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const state = () => {
   return {
+    id: 0,
     login: '',
     token: '',
     phone: '',
@@ -37,7 +38,8 @@ export const getters = {
 }
 
 export const mutations = {
-  setUser(state, {login, token, phone, userType, firstName, secondName, address}){
+  setUser(state, {id, login, token, phone, userType, firstName, secondName, address}){
+    state.id = id
     state.login = login
     state.token = token
     state.userType = userType

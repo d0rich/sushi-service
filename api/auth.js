@@ -85,6 +85,7 @@ router.post('/register', async (req,res) => {
     const authData = req.body
     const user = await db.Users.create({
       login: authData.login,
+      phone: authData.phone,
       password: authData.password,
       firstName: authData.firstName,
       secondName: authData.secondName

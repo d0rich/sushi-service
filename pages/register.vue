@@ -6,6 +6,7 @@
     <v-text-field placeholder="Логин" v-model="formData.login" :rules="rules" />
     <v-text-field placeholder="Имя" v-model="formData.firstName" :rules="rules" />
     <v-text-field placeholder="Фамилия" v-model="formData.secondName" :rules="rules" />
+    <v-text-field type="ph" placeholder="Телефон" v-model="formData.phone" />
     <v-text-field placeholder="Пароль" v-model="formData.password" :rules="rules" type="password" />
     <v-text-field placeholder="Пароль" v-model="repeatPwd" :rules="[...rules, passwordRule]" type="password" />
     <v-row no-gutters>
@@ -50,6 +51,7 @@ name: "register",
       repeatPwd: '',
       formData:{
         login: '',
+        phone: '',
         password: '',
         firstName: '',
         secondName: ''
@@ -73,6 +75,7 @@ name: "register",
           await this.regReq(this.formData)
           this.errorMsg = ''
           this.formData.login = ''
+          this.formData.phone = ''
           this.formData.password = ''
           this.formData.firstName = ''
           this.formData.secondName = ''

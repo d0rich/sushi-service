@@ -15,9 +15,11 @@ app.get('/echo/:what', (req, res) => {
 import authRouter from './auth'
 import itemTypesRouter from './itemTypes'
 import itemsRouter from './items'
+import ordersRouter from './orders'
 app.use('/auth', authRouter)
 app.use('/item-types', itemTypesRouter)
 app.use('/items', itemsRouter)
+app.use('/orders', ordersRouter)
 
 
 module.exports = {

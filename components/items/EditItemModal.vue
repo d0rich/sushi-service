@@ -19,7 +19,7 @@
           <v-text-field label="Название" v-model="formData.name" :rules="rules" />
           <v-textarea label="Описание" outlined v-model="formData.description" :rules="rules" />
           <v-text-field type="number" label="Вес" v-model="formData.weight" :rules="rules" suffix="грамм" />
-          <v-text-field type="number" label="Цена" v-model="formData.cost" :rules="rules" suffix="руб." />
+          <v-text-field type="number" label="Цена" v-model="formData.cost" :rules="rules" suffix="₽" />
           <v-checkbox v-model="formData.show" label="Отображать всем" />
         </v-card-text>
         <v-card-actions>
