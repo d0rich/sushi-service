@@ -66,6 +66,11 @@
 import CreateOrderModal from "@/components/orders/CreateOrderModal";
 export default {
 name: "cart",
+  head(){
+    return{
+      title: 'Корзина'
+    }
+  },
   components: {
   CreateOrderModal
   },

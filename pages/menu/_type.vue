@@ -45,6 +45,11 @@ import CreateItemModal from "@/components/items/CreateItemModal";
 import EditItemModal from "@/components/items/EditItemModal";
 export default {
 name: "type",
+  head(){
+    return {
+      title: this.title
+    }
+  },
   components: {
     CreateItemModal, EditItemModal
   },
@@ -63,7 +68,11 @@ name: "type",
   computed: {
     ...mapGetters({
       isAdmin: "auth/isAdmin"
-    })
+    }),
+    title(){
+      console.log(this.$store.state.itemTypes.itemTypes.find(type => type.urlName === this.$route.params.type))
+      return this.$store.state.itemTypes.itemTypes.find(type => type.urlName === this.$route.params.type)?.type || 'Меню'
+    }
   },
   watch:{
     page(){

@@ -18,7 +18,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn :loading="load" color="red" @click="show = !show">Отмена</v-btn>
+            <v-btn dark :loading="load" color="red" @click="show = !show">Отмена</v-btn>
             <v-btn :loading="load" color="primary" type="submit">Вход</v-btn>
           </v-card-actions>
         </v-card>
