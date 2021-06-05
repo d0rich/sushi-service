@@ -83,14 +83,18 @@ name: "cart",
   },
   computed: {
     itemsCount(){
-      return this.items.reduce((allCount, item) => {
-        return allCount + item.count
-      }, 0)
+      return this.items
+        .filter(item => item.item.show)
+        .reduce((allCount, item) => {
+          return allCount + item.count
+        }, 0)
     },
     allCost(){
-      return this.items.reduce((allCount, item) => {
-        return allCount + item.count * item.item.cost
-      }, 0)
+      return this.items
+        .filter(item => item.item.show)
+        .reduce((allCount, item) => {
+          return allCount + item.count * item.item.cost
+        }, 0)
     }
   },
   watch: {

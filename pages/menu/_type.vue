@@ -70,7 +70,6 @@ name: "type",
       isAdmin: "auth/isAdmin"
     }),
     title(){
-      console.log(this.$store.state.itemTypes.itemTypes.find(type => type.urlName === this.$route.params.type))
       return this.$store.state.itemTypes.itemTypes.find(type => type.urlName === this.$route.params.type)?.type || 'Меню'
     }
   },
