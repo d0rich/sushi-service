@@ -1,24 +1,27 @@
 <template>
-  <div>
-    <h1>Карточка покупателя</h1>
-    <v-divider class="my-3" />
-    <p class="error--text">{{errorMsg}}</p>
-    <p class="success--text">{{successMsg}}</p>
-    <v-form v-if="$store.getters['auth/isAuth']"
-            :disabled="load" ref="form"
-            v-model="valid" @submit.prevent="editProfile">
-      <v-text-field label="Имя" v-model="formData.firstName" :rules="rules" />
-      <v-text-field label="Фамилия" v-model="formData.secondName" :rules="rules" />
-      <v-text-field type="ph" label="Телефон" v-model="formData.phone" />
-      <v-text-field label="Адрес по умолчанию" v-model="formData.address" />
-      <v-row no-gutters>
-        <v-spacer />
-        <v-btn :loading="load" type="submit" color="primary">
-          Сохранить
-        </v-btn>
-      </v-row>
-    </v-form>
-    <h1 v-else>Необходимо авторизоваться</h1>
+  <div class="personal-container">
+    <div class="personal-info">
+      <h1>Карточка покупателя</h1>
+      <v-divider class="my-3" />
+      <p class="error--text">{{errorMsg}}</p>
+      <p class="success--text">{{successMsg}}</p>
+      <v-form v-if="$store.getters['auth/isAuth']" class="personal-info__form"
+              :disabled="load" ref="form"
+              v-model="valid" @submit.prevent="editProfile">
+        <v-text-field label="Имя" v-model="formData.firstName" :rules="rules" />
+        <v-text-field label="Фамилия" v-model="formData.secondName" :rules="rules" />
+        <v-text-field type="ph" label="Телефон" v-model="formData.phone" />
+        <v-text-field label="Адрес по умолчанию" v-model="formData.address" />
+        <v-row no-gutters>
+          <v-spacer />
+          <v-btn :loading="load" type="submit" color="primary">
+            Сохранить
+          </v-btn>
+        </v-row>
+      </v-form>
+      <h1 v-else>Необходимо авторизоваться</h1>
+    </div>
+
   </div>
 </template>
 
@@ -92,5 +95,15 @@ name: "personal",
 </script>
 
 <style scoped>
-
+.personal-container{
+  display: flex;
+  justify-content: center;
+}
+.personal-info{
+  width: 100%;
+  max-width: 800px;
+}
+.personal-info__form{
+  width: 100%;
+}
 </style>

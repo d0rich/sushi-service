@@ -16,6 +16,9 @@
             <v-text-field label="Логин" v-model="formData.login" :rules="rules" />
             <v-text-field label="Пароль" v-model="formData.password" :rules="rules" type="password" />
           </v-card-text>
+          <v-card-text>
+            Первый раз здесь? <nuxt-link to="/register"><span @click="show = !show">Регистрация</span></nuxt-link>
+          </v-card-text>
           <v-card-actions>
             <v-spacer />
             <v-btn dark :loading="load" color="red" @click="show = !show">Отмена</v-btn>

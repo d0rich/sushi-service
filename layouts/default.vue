@@ -95,6 +95,7 @@
           </v-icon>
         </v-badge>
       </v-btn>
+      <v-spacer />
       <img :src="imgSrc" alt="logo" style="height: 80%">
       <v-toolbar-title v-text="title" />
       <v-spacer />
