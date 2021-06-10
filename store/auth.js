@@ -66,7 +66,7 @@ export const actions = {
     commit('setUser', { token: '', login: '', userType: 0, firstName: '', secondName: '' })
     localStorage.removeItem('token')
   },
-  async register({}, {login, password, firstName, secondName}){
-    const res = await axios.post('/api/auth/register', { login, password, firstName, secondName })
+  async register({}, {login, password, firstName, secondName, phone}){
+    const res = await axios.post('/api/auth/register', { login, password, firstName, secondName, phone })
   }
 }

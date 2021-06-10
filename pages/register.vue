@@ -18,7 +18,7 @@
           Регистрация
         </v-btn>
       </v-row>
-      <v-dialog v-model="showDialog">
+      <v-dialog width="300px" persistent v-model="showDialog" >
         <v-card>
           <v-card-title>
             Статус регистрации
@@ -30,7 +30,7 @@
           <v-divider />
           <v-card-actions>
             <v-spacer />
-            <v-btn @click="showDialog = !showDialog" color="red">Закрыть</v-btn>
+            <v-btn dark @click="showDialog = !showDialog" color="red">Закрыть</v-btn>
             <v-btn to="/" color="primary">На главную</v-btn>
           </v-card-actions>
         </v-card>
