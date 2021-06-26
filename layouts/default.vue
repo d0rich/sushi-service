@@ -120,7 +120,7 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}
+      <span>&copy; 2021
         <a href="https://d0rich.github.io" target="_blank">Nikolay Dorofeev (d0rich)</a>
       </span>
     </v-footer>
