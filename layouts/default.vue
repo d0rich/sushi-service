@@ -120,7 +120,9 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }}
+        <a href="https://d0rich.github.io" target="_blank">Nikolay Dorofeev (d0rich)</a>
+      </span>
     </v-footer>
   </v-app>
 </template>
@@ -154,7 +156,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Суши от Надюши'
+      title: 'Суши Тайм'
     }
   },
   computed:{

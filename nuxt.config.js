@@ -48,7 +48,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'https://tpu-sushi.herokuapp.com'
+    baseUrl: 'https://sushi-service.herokuapp.com'
+    //baseUrl: 'http://localhost:3000'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
